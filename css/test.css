@@ -1,0 +1,64 @@
+/* If the HTML element has two classes
+   and each of these classes has got the 'transition' property defined
+   the both transition properties do not concatenate automatically,
+   the further transition property overwrites the previous one.
+   The @mixin transitions merges all transition properties into one comma-separated value.
+   It takes the list of transition-templates as arguments.*/
+/* The transition-template takes the following properties:
+   * before [map] - the [map] object defines all css rules that should be
+                    included before the transition action is taken
+   * transition [list] - it defines all transition-* values, eg. color .1s .2s ease-in
+   * <selectors> [map] (optional) - it defines selector that will be nested in the root scope
+                                  - it must the full syntactically correct css-selectore,
+                                    eg. ":hover", ":focus", ".button", "&.active", "&>span"
+                                  - the order of defined <selectors> is respected */
+.button {
+  color: blue;
+  background-color: yellow;
+  border: solid 1px orange;
+  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out, border 0.15s ease-in-out; }
+  .button:hover {
+    color: red;
+    background-color: orange; }
+  .button:focus {
+    color: blue;
+    background-color: white; }
+  .button.active {
+    color: pink; }
+  .button.disactive {
+    color: grey; }
+  .button.highest {
+    border: dotted 1px red; }
+  .button:hover {
+    border: solid 3px red; }
+  .button:focus {
+    border: solid 5px blue; }
+  .button span {
+    border: none; }
+
+.text {
+  color: blue;
+  background-color: yellow;
+  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out; }
+  .text:hover {
+    color: red;
+    background-color: orange; }
+  .text:focus {
+    color: blue;
+    background-color: white; }
+  .text.active {
+    color: pink; }
+  .text.disactive {
+    color: grey; }
+
+.field {
+  border: solid 1px orange;
+  transition: border 0.15s ease-in-out; }
+  .field.highest {
+    border: dotted 1px red; }
+  .field:hover {
+    border: solid 3px red; }
+  .field:focus {
+    border: solid 5px blue; }
+  .field span {
+    border: none; }

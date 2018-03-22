@@ -1,0 +1,359 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Maven+Pro');
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+
+@import 'rwd';
+@import 'variables';
+@import 'mixins';
+@import 'extensions';
+
+.preload, .preload *{
+  transition: none !important;
+}
+
+.box-wide{
+  @extend %box;
+  @include media(medium){width:768px};
+	@include media(large){width:992px};
+	@include media(xlarge){width:1200px};
+}
+
+.box-narrow{
+  @extend %box;
+  @include media(xsmall){width:100%};
+  @include media(small){width:480px};
+  @include media(medium, andlarger){width:768px};
+}
+
+@include scroll-style();
+
+* {
+  @extend %reset-css;
+}
+
+body {
+  background:linear-gradient(to top, $color-pink-b, $color-pink-a);
+  background-attachment: fixed;
+  height:100vh;
+  width:100%;
+}
+
+.box-wide, box-narrow{
+  &>div{
+    margin:6px auto;
+  }
+}
+
+#textBox{
+  height:50vh;
+  min-height:100px;
+  max-height:400px;
+}
+
+#navigBox{
+  @include container(100%,100%,50%);
+}
+
+#navigBox>div{
+  text-align:center;
+  &:first-child{
+    @include media(medium,andlarger){text-align:right;}
+  }
+  &:last-child{
+    @include media(medium,andlarger){text-align:left;}
+  }
+}
+
+#buttonContainer{
+  @include media(small,andsmaller){
+    display:inline-block;
+    &>*{
+      display:block;
+      //margin: 0px;
+    }
+  }
+}
+
+#promptBox{
+  @include transitions($transition-highlight);
+  span{
+    display:none;
+    margin:10px;
+    font-family: 'Comfortaa', cursive;
+    font-size:18px;
+    color:$color-grey-d;
+  }
+  span:first-child{
+    padding:20px 0px;
+  }
+}
+
+#textBox textarea{
+  @include transitions($transition-highlight);
+  @include media(small,andlarger){font-size:20px};
+  height:100%;
+  width:100%;
+  resize: none;
+  border:none 0px transparent;
+  padding:10px;
+  font-family: 'Raleway', sans-serif;
+  font-size:16px;
+  text-align:justify;
+  color:$color-grey-d;
+}
+
+.button{
+  display:inline-block;
+  border:none;
+  margin:4px 10px;
+  padding:3px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  letter-spacing:2px;
+  text-align:center;
+  cursor:pointer;
+  background-color:transparent;
+  font-family: 'Maven Pro', sans-serif;
+  font-variant:small-caps;
+  color:$color-grey-d;
+  &>*{
+    display:inline-block;
+    vertical-align:middle;
+  }
+}
+
+.button.main{
+  @include transitions($transition-text-hover-grey,$transition-strip-bottom-blur);
+  font-size:22px;
+}
+
+.button.switch{
+  @include transitions($transition-text-hover-grey);
+  font-size:18px;
+  &>span:first-child{
+    display:inline-block;
+    width:50px;
+    height:25px;
+    padding:2px;
+    border-radius:12.5px;
+    text-align:center;
+    vertical-align:middle;
+    box-shadow:0px 0px 5px 1px rgba(44,44,44,.3) inset;
+    transition:background-color .15s .1s ease-in-out;
+    &>span{
+      display:inline-block;
+      position:relative;
+      width:50%;
+      height:100%;
+      border-radius:50%;
+      background-color:white;
+      box-shadow:0px 1px 3px 2px rgba(44,44,44,.3);
+      transition:left .15s ease-in-out;
+    }
+  }
+  &.switch-on>span:first-child{
+    background-color:$color-on;
+    &>span{
+      left:-25%;
+    }
+  }
+  &.switch-off>span:first-child{
+    background-color:$color-off;
+    &>span{
+      left:25%;
+    }
+  }
+}
+
+.input-box{
+  display:inline-block;
+  @include transitions($transition-highlight);
+  * {
+    display:block;
+    float:left;
+    height:100%;
+  }
+  &::after{
+    content:"";
+    display:inline-block;
+    clear:both;
+  }
+  span{
+    width:26px;
+    padding:2px;
+    font-size:22px;
+    color:$color-pink-c;
+    cursor:pointer;
+  }
+  input, button{
+    padding:4px;
+    border:none;
+    min-width:26px;
+    font-family: 'Raleway', sans-serif;
+    font-size:16px;
+  }
+  input{
+    color:$color-grey-c;
+    @include transitions($transition-highlight);
+
+    &.input-invalid{
+      @include transitions($transition-invalid-highlight);
+    }
+
+  }
+  button{
+    @include transitions($transition-button-highlight,$text-grey-to-pink);
+    text-align:center;
+    font-variant:small-caps;
+    cursor:pointer;
+    
+    &.input-invalid{
+      cursor:not-allowed;
+      @include transitions($transition-button-invalid-highlight);
+    }
+  }
+}
+
+.square-button{
+  display:inline-block;
+  height:26px;
+  min-width:26px;
+  text-align:center;
+  margin:0px 2px;
+  padding:4px 1px;
+  font-size:16px;
+  cursor:pointer;
+  @include transitions($button-highlight,$text-pink-vivid);
+}
+
+#resultBox, #jumpToBox{
+  display:none;
+}
+
+#wordListTable{
+  width:100%;
+  table-layout: fixed;
+  text-align:center;
+  margin:4px auto;
+  font-family: 'Maven Pro', sans-serif;
+  font-size:16px;
+  color:$color-grey-d;
+  td {
+    padding:2px;
+  }
+  tbody td{
+    @include transitions($transition-highlight);
+    &:first-child{
+      text-align:right;
+      padding-right:12px;
+      cursor:pointer;
+    }
+    &:last-child{
+      text-align:left;
+      padding-left:12px;
+    }
+  }
+  thead td{
+    position:relative;
+  }
+}
+
+#tableConfig td, #tableHeaders td{
+  @include transitions($transition-highlight);
+}
+
+#wordListTable * {
+  vertical-align:middle;
+}
+
+#wordListTable thead>tr:first-child>td{
+  transition:none;
+  background-color:transparent;
+  text-align:center;
+  &>div{
+    display:inline-block;
+    &>*{
+      float:left;
+      margin:0px 2px;
+    }
+  }
+}
+
+#search{
+  width:100%;
+  label{
+    width:100%;
+  }
+  input{
+    width:calc(100% - 26px);
+  }
+}
+
+#sortAZ, #sort09{
+  display:block;
+  float:right;
+}
+
+#tableOptions{
+  display:block;
+  float:left;
+}
+
+#optionPrompt{
+  display:none;
+  position:absolute;
+  top:100%;
+  list-style-type:none;
+  li{
+    margin:1px;
+    padding:4px;
+    @include transitions($transition-highlight-strong,$text-pink-vivid);
+    cursor:pointer;
+  }
+}
+
+#tableConfig{
+  td:last-child{
+    text-align:right;
+  }
+}
+
+.num-button{
+  display:inline-block;
+  @include transitions($transition-highlight-strong,$text-grey-to-pink);
+  min-width:26px;
+  height:26px;
+  margin:4px 0px;
+  padding:5px 2px;
+  border:none;
+  text-align:center;
+  font-size:16px;
+  cursor:pointer;
+  &.text{
+    font-family: 'Maven Pro', sans-serif;
+  }
+}
+
+#dialog{
+  position:fixed;
+  display:block;
+  width:200px;
+  left:0px;
+  right:0px;
+  z-index:1;
+  margin:auto;
+  text-align:center;
+  background-color:rgba(22,22,22,.7);
+  border-radius:4px;
+  font-family: 'Raleway', sans-serif;
+  font-size:14px;
+  color:rgb(198,198,198);
+  padding:8px;
+  cursor:pointer;
+  @include transitions($dialog-box-toggle);
+}
+
+input{
+  @include placeholder($color-pink-c,$color-placeholder-focus);
+}

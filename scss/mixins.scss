@@ -1,0 +1,110 @@
+@import 'rwd';
+@import 'variables';
+
+@mixin alpha-white($alpha) {
+  background-color: rgba(255,255,255,$alpha);
+}
+
+@mixin container($xs:100%,$s:$xs,$m:$xs,$l:$m,$xl:$l){
+  &::after{
+    content:'';
+    display:block;
+    clear:both;
+  }
+  &>*{
+    display:block;
+    float:left;
+    margin:0px;
+    height:100%;
+    @include media(xsmall){width:$xs}
+    @include media(small){width:$s}
+    @include media(medium){width:$m}
+    @include media(large){width:$l}
+    @include media(xlarge){width:$xl}
+  }
+}
+
+@mixin transitions($templates...){
+  $beforeMerge:();
+  $transitionMerge:();
+
+  @each $template in $templates{
+    $before: map-get($template,before);
+    $transition: map-get($template,transition);
+    $beforeMerge:map-merge($beforeMerge,$before);
+    $transitionMerge:append($transitionMerge, $transition, comma);
+  }
+
+  @each $prop, $value in $beforeMerge {
+    #{inspect($prop)}: #{inspect($value)};
+  }
+
+  transition:$transitionMerge;
+
+  @each $template in $templates{
+    $selectors: map-remove($template, before, transition);
+    @each $selector,$rules in $selectors{
+      #{$selector}{
+        @each $property, $value in $rules{
+          #{inspect($property)}: #{inspect($value)};
+        }
+      }
+    }
+  }
+}
+
+@mixin placeholder($color,$focus){
+  &::-webkit-input-placeholder{
+    color: $color;
+    transition:color .25s ease-in-out;
+  }
+
+  &::-moz-placeholder{
+    transition:color .25s ease-in-out;
+    color: $color;
+  }
+
+  &:-ms-input-placeholder{
+    transition:color .25s ease-in-out;
+    color: $color;
+  }
+
+  &:-moz-placeholder {
+    transition:color .25s ease-in-out;
+    color: $color;
+  }
+  
+  &:focus::-webkit-input-placeholder{
+    color: $focus;
+  }
+  
+  &:focus::-moz-placeholder{
+    color: $focus;
+  }
+  
+  &:focus:-ms-input-placeholder{
+    color: $focus;
+  }
+
+  &:focus:-moz-placeholder {
+    color: $focus;
+  }
+}
+
+@mixin scroll-style(){
+  ::-webkit-scrollbar {
+      width: 10px;
+      height:10px;
+      background-color: $color-pink-a;
+  }
+
+  ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $color-pink-c;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    outline: 1px solid $color-pink-c;
+  }
+}

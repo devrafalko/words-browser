@@ -1,0 +1,91 @@
+@mixin transitions($templates...){
+  $beforeMerge:();
+  $transitionMerge:();
+
+  @each $template in $templates{
+    $before: map-get($template,before);
+    $transition: map-get($template,transition);
+    $beforeMerge:map-merge($beforeMerge,$before);
+    $transitionMerge:append($transitionMerge, $transition, comma);
+  }
+
+  @each $prop, $value in $beforeMerge {
+    #{inspect($prop)}: #{inspect($value)};
+  }
+
+  transition:$transitionMerge;
+
+  @each $template in $templates{
+    $selectors: map-remove($template, before, transition);
+    @each $selector,$rules in $selectors{
+      #{$selector}{
+        @each $property, $value in $rules{
+          #{inspect($property)}: #{inspect($value)};
+        }
+      }
+    }
+  }
+}
+
+/* If the HTML element has two classes
+   and each of these classes has got the 'transition' property defined
+   the both transition properties do not concatenate automatically,
+   the further transition property overwrites the previous one.
+   The @mixin transitions merges all transition properties into one comma-separated value.
+   It takes the list of transition-templates as arguments.*/
+
+/* The transition-template takes the following properties:
+   * before [map] - the [map] object defines all css rules that should be
+                    included before the transition action is taken
+   * transition [list] - it defines all transition-* values, eg. color .1s .2s ease-in
+   * <selectors> [map] (optional) - it defines selector that will be nested in the root scope
+                                  - it must the full syntactically correct css-selectore,
+                                    eg. ":hover", ":focus", ".button", "&.active", "&>span"
+                                  - the order of defined <selectors> is respected */
+
+$colors:(
+  before:(color:blue,background-color:yellow),
+  transition:(color .1s ease-in-out,background-color .1s ease-in-out),
+  "&:hover":(color:red, background-color:orange),
+  "&:focus":(color:blue, background-color:white),
+  "&.active":(color:pink),
+  "&.disactive":(color:grey)
+);
+
+$borders:(
+  before:(border:solid 1px orange),
+  transition:(border .15s ease-in-out),
+  "&.highest":(border:dotted 1px red),
+  "&:hover":(border:solid 3px red),
+  "&:focus":(border: solid 5px blue),
+  "span":(border:none)
+);
+
+.button{
+  @include transitions($colors,$borders);
+}
+
+.text{
+  @include transitions($colors);
+}
+
+.field{
+  @include transitions($borders);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

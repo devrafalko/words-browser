@@ -1,0 +1,97 @@
+$color-pink-a: #e6d1d8;
+$color-pink-b: #ef9a9a;
+$color-pink-c: #e38d8d;
+$color-pink-d: #F57A7A;
+$color-pink-e: #E36868;
+
+$color-on: #8bc34a;
+$color-off:#ef5350;
+
+$color-shadow-d: rgba(233,33,90,.1);
+
+
+$color-grey-a: #878082;
+$color-grey-b: #736C6E;
+$color-grey-c: #5E5759;
+$color-grey-d: #4F484A;
+
+$color-red-a: #ef9a9a;
+$color-red-b: #e57373;
+$color-red-c: #f44336;
+
+$color-placeholder-focus: #bdbdbd;
+
+$transition-text-hover-grey:(
+  before:(color:$color-grey-d),
+  transition:color .15s ease-in-out,
+  "&:hover":(color:$color-pink-d)
+);
+
+$transition-strip-bottom-blur:(
+  before:(box-shadow:0px -10px 1px -10px rgba(0,0,0,1) inset),
+  transition:box-shadow .15s ease-in-out,
+  "&:hover":(box-shadow:0px -10px 8px -10px rgba(0,0,0,.5) inset)
+);
+
+$transition-highlight:(
+  before:(background-color:rgba(255,255,255,.1)),
+  transition:(background-color .15s ease-in-out),
+  "&:hover":(background-color:rgba(255,255,255,.25)),
+  "&:focus":(background-color:rgba(255,255,255,.5))
+);
+
+$transition-invalid-highlight:(
+  before:(color:$color-red-b),
+  transition:(color .35s ease-in-out),
+  "&:hover":(color:$color-red-a),
+  "&:focus":(color:$color-red-c)
+);
+
+$transition-button-highlight:(
+  before:(background-color:rgba(255,255,255,.2)),
+  transition:(background-color .15s ease-in-out),
+  "&:hover":(background-color:rgba(255,255,255,.5))
+);
+
+$transition-button-invalid-highlight:(
+  before:(background-color:rgba(255,255,255,.2)),
+  "&:hover":(background-color:rgba(255,255,255,.2))
+);
+
+$transition-highlight-strong:(
+  before:(background-color:rgba(255,255,255,.5)),
+  transition:(background-color .1s ease-in-out),
+  "&:hover":(background-color:rgba(255,255,255,.75)),
+  "&.active":(background-color:rgba(255,255,255,.75))
+);
+
+$button-highlight:(
+  before:(background-color:(rgba(238,157,158,.1)), border: solid 1px rgba(238,157,158,1)),
+  transition:(background-color .1s ease-in-out),
+  "&:hover":(background-color:rgba(238,157,158,.5)),
+  "&:disabled":(background-color:(rgba(238,157,158,.1)), border: solid 1px rgba(238,157,158,.4)),
+  "&.active":(background-color:rgba(255,255,255,.4))
+);
+
+$text-grey-to-pink:(
+  before:(color:$color-grey-b),
+  transition:(color .15s .1s ease-in-out),
+  "&:hover":(color:$color-pink-d),
+  "&.active":(color:$color-pink-d)
+);
+
+$text-pink-vivid:(
+  before:(color:$color-pink-d),
+  transition:(color .15s .1s ease-in-out),
+  "&:hover":(color:$color-pink-e),
+  "&:disabled":(color:$color-pink-c),
+  "&.active":(color:$color-pink-d)
+);
+
+$dialog-box-toggle:(
+  before:(),
+  transition:(opacity .35s .1s ease-in-out, bottom .25s ease-in-out),
+  "&.dialog-visible":(bottom:30px, opacity:1),
+  "&.dialog-hidden":(bottom:-100px, opacity:0)
+);
+

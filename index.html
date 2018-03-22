@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Words Browser</title>
+    <link rel="icon" href="ico.png"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="./css/styles.css"/>
+    <script src="./index.js" defer></script>
+
+  </head>
+  <body class="preload">
+    <div class="box-wide">
+      <div id="textBox"><textarea></textarea></div>
+      <div id="navigBox">
+        <div>
+          <button class="button main" id="clearButton">Wyczyść</button>
+          <button class="button main" id="convertButton">Konwertuj</button>
+        </div>
+        <div>
+          <div id="buttonContainer">
+            <button class="button switch switch-button" id="letterCaseButton">
+              <span><span></span></span>
+              <span>Ignoruj wielkość liter</span>
+            </button>
+            <button class="button switch switch-button" id="turboModeButton">
+              <span><span></span></span>
+              <span>Tryb turbo</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="promptBox">
+        <span id="stateMessage"></span>
+        <span id="countMessage"></span>
+        <span id="uniqueMessage"></span>
+      </div>
+    </div>
+
+    <div class="box-narrow" id="resultBox">
+      <table id="wordListTable">
+        <thead>
+          <tr>
+            <td colspan="2">
+              <div id="tableNavig">
+                <span id="pageTenMinus" class="num-button fa fa-angle-double-left"></span>
+                <span id="pageOneMinus" class="num-button fa fa-angle-left"></span>
+                <span class="num-button tile-page text">1</span>
+                <span class="num-button tile-page text">2</span>
+                <span class="num-button tile-page text">3</span>
+                <span class="num-button tile-page text">4</span>
+                <span class="num-button tile-page text">5</span>
+                <span id="pageOnePlus" class="num-button fa fa-angle-right"></span>
+                <span id="pageTenPlus" class="num-button fa fa-angle-double-right"></span>
+                <div id="jumpToBox" class="input-box">
+                  <input id="jumpToInput" type="text" style="width:46px"/>
+                  <button id="jumpToSubmit">Przejdź</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr id="tableConfig">
+            <td>
+              <div class="input-box" id="search">
+                <label>
+                  <span class="fa fa-search"></span>
+                  <input type="text" id="searchInput"/>
+                </label>
+              </div>
+            </td>
+            <td id="wordNumberBox"></td>
+          </tr>
+          <tr id="tableHeaders">
+            <td>
+              <button class="square-button fa fa-navicon" id="tableOptions"></button>
+              <ul id="optionPrompt"></ul>
+              <span>Słowo</span>
+              <button class="square-button fa" id="sortAZ"></button>
+            </td>
+            <td>
+              <span>Wystąpienie</span>
+              <button class="square-button fa" id="sort09"></button>
+            </td>
+          </tr>
+        </thead>
+        <tbody id="tableList">
+        </tbody>
+      </table>
+    </div>
+
+    <div id="dialog" class="dialog-hidden">
+      <span></span>
+    </div>
+
+  </body>
+</html>
